@@ -1,0 +1,63 @@
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.vcxproj.user
+*.vcxproj.filters
+.ipch/
+*.psess
+*.vsp
+*.vspx
+
+# Build outputs
+build/
+out/
+bin/
+lib/
+dist/
+Debug/
+Release/
+AxImageLoader/
+x64/
+x86/
+*/Debug/
+*/Release/
+*/x64/
+*/build/
+
+# Object files, libraries, executables, debug files
+*.obj
+*.o
+*.lo
+*.a
+*.la
+*.lib
+*.dll
+*.so
+*.dylib
+*.exe
+*.out
+*.app
+*.pdb
+*.ilk
+*.meta
+*.idb
+
+# IDEs and editors
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# Temporary / lock files / editor swap
+*~
+*.swp
+*.swo
+*.tmp
+*.temp
+*.log
+*.lock
+*.bak
+*.orig
