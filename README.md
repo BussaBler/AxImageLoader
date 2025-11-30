@@ -14,7 +14,6 @@ Example (pseudo-C++):
 #include "AxImageLoader.h"
 
 std::vector<uint8_t> img = AxImageLoader::loadImage("assets/sprite.png", outWidth, outHeight, outChannels, requiredChannels);
-// img.pixels, img.width, img.height, img.format
 ```
 
 ## Notes
