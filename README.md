@@ -13,7 +13,7 @@ Example (pseudo-C++):
 ```cpp
 #include "AxImageLoader.h"
 
-Image img = AxImageLoader::LoadFromFile("assets/sprite.png");
+std::vector<uint8_t> img = AxImageLoader::loadImage("assets/sprite.png", outWidth, outHeight, outChannels, requiredChannels);
 // img.pixels, img.width, img.height, img.format
 ```
 
