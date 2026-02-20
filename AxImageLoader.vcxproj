@@ -128,7 +128,6 @@
     <ClCompile Include="AxImageLoader.cpp" />
     <ClCompile Include="BitReader.cpp" />
     <ClCompile Include="HuffmanTree.cpp" />
-    <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AxImageLoader.h" />

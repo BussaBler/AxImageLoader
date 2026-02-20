@@ -7,9 +7,9 @@ A simple library for loading images. Intended for use in a game engine project. 
 
 ## Usage
 1. Add the library files to your project or link the library.
-2. Include the public header(s) and call the loader to obtain image pixel data.
+2. Include the public header and call the loader to obtain image pixel data.
 
-Example (pseudo-C++):
+Example:
 ```cpp
 #include "AxImageLoader.h"
 

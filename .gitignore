@@ -6,6 +6,7 @@
 *.sln.docstates
 *.vcxproj.user
 *.vcxproj.filters
+*.vcproj
 .ipch/
 *.psess
 *.vsp
