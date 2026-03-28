@@ -6,13 +6,6 @@
 #include <iostream>
 #include <numeric>
 
-namespace {
-	bool isPng(const std::vector<uint8_t>& data) {
-		static const std::array<uint8_t, 8> pngSignature = { 137, 80, 78, 71, 13, 10, 26, 10 };
-		return data.size() >= pngSignature.size() && std::equal(pngSignature.begin(), pngSignature.end(), data.begin());
-	}
-}
-
 namespace AxImageLoader {
 	// these are deflate spec constants
 	const std::array<int, 29> lengthExtraBits = {
@@ -60,7 +53,12 @@ namespace AxImageLoader {
 	};
 
 #pragma region PngFunctions
-	ImageFormat AxImageLoader::detectFormat(const std::vector<uint8_t>& fileData) {
+	static bool isPng(const std::vector<uint8_t>& data) {
+		static const std::array<uint8_t, 8> pngSignature = { 137, 80, 78, 71, 13, 10, 26, 10 };
+		return data.size() >= pngSignature.size() && std::equal(pngSignature.begin(), pngSignature.end(), data.begin());
+	}
+
+	static ImageFormat detectFormat(const std::vector<uint8_t>& fileData) {
 		if (isPng(fileData)) {
 			return ImageFormat::PNG;
 		}

@@ -4,6 +4,7 @@
 *.user
 *.userosscache
 *.sln.docstates
+*.vcxproj
 *.vcxproj.user
 *.vcxproj.filters
 *.vcproj
