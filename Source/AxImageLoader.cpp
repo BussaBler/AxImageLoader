@@ -102,6 +102,34 @@ namespace AxImageLoader {
 		}
 	}
 
+	static HuffmanTree blListToHuffmanTree(const std::vector<int>& bitLength, const std::vector<int>& alphabet) {
+		int maxBits = *std::max_element(bitLength.begin(), bitLength.end());
+
+		std::vector<int> blCount(maxBits + 1, 0);
+		for (int bits : bitLength) {
+			if (bits != 0) {
+				blCount[bits]++;
+			}
+		}
+
+		std::vector<int> nextCode(maxBits + 1, 0);
+		for (int bits = 2; bits <= maxBits; bits++) {
+			nextCode[bits] = (nextCode[bits - 1] + blCount[bits - 1]) << 1;
+		}
+
+		HuffmanTree tree;
+		size_t iterationSize = std::min(bitLength.size(), alphabet.size());
+		for (size_t n = 0; n < iterationSize; n++) {
+			int bits = bitLength[n];
+			if (bits != 0) {
+				int codeword = nextCode[bits];
+				tree.insert(codeword, bits, alphabet[n]);
+				nextCode[bits]++;
+			}
+		}
+		return tree;
+	}
+
 	static void inflateBlockFixed(BitReader& bitReader, std::vector<uint8_t>& output) {
 		std::vector<int> literalLengthBl(288);
 		std::fill(literalLengthBl.begin(), literalLengthBl.begin() + 144, 8);
@@ -178,34 +206,6 @@ namespace AxImageLoader {
 	static void inflateBlockDynamic(BitReader& bitReader, std::vector<uint8_t>& output) {
 		auto trees = decodeTrees(bitReader);
 		inflateBlockData(bitReader, trees.first, trees.second, output);
-	}
-
-	static HuffmanTree blListToHuffmanTree(const std::vector<int>& bitLength, const std::vector<int>& alphabet) {
-		int maxBits = *std::max_element(bitLength.begin(), bitLength.end());
-
-		std::vector<int> blCount(maxBits + 1, 0);
-		for (int bits : bitLength) {
-			if (bits != 0) {
-				blCount[bits]++;
-			}
-		}
-
-		std::vector<int> nextCode(maxBits + 1, 0);
-		for (int bits = 2; bits <= maxBits; bits++) {
-			nextCode[bits] = (nextCode[bits - 1] + blCount[bits - 1]) << 1;
-		}
-
-		HuffmanTree tree;
-		size_t iterationSize = std::min(bitLength.size(), alphabet.size());
-		for (size_t n = 0; n < iterationSize; n++) {
-			int bits = bitLength[n];
-			if (bits != 0) {
-				int codeword = nextCode[bits];
-				tree.insert(codeword, bits, alphabet[n]);
-				nextCode[bits]++;
-			}
-		}
-		return tree;
 	}
 
 	static uint8_t getSamplesPerPixel(uint8_t colorType) {
