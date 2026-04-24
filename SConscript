@@ -14,7 +14,7 @@ localEnv.Append(CPPPATH=[
     "Include"
 ])
 
-sources = Glob('*.cpp')
+sources = Glob('Source/*.cpp')
 
 axImageLoader = localEnv.StaticLibrary(f'#/Bin/{configName}/AxImageLoader/AxImageLoader', sources)
 
