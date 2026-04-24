@@ -1,13 +1,21 @@
-Import('env')
+Import('env', 'buildInfo')
+
+platform = buildInfo['platform']
+architecture = buildInfo['architecture']
+compiler = buildInfo['compiler']
+config = buildInfo['config']
+configName = config.capitalize()
+vsproj = buildInfo['vsproj']
+renderer = buildInfo['renderer']
 
 localEnv = env.Clone()
 
 localEnv.Append(CPPPATH=[
-    'Include'
+    "Include"
 ])
 
-sources = localEnv.Glob('Source/*.cpp')
+sources = Glob('*.cpp')
 
-axImageLoaderLib = localEnv.StaticLibrary('axImageLoader', sources)
+axImageLoader = localEnv.StaticLibrary(f'#/Bin/{configName}/AxImageLoader/AxImageLoader', sources)
 
-Return('axImageLoaderLib')
+Return('axImageLoader')
